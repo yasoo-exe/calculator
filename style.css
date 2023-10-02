@@ -82,3 +82,7 @@
 .buttons div .operators {
     background-color: green;
 }
+
+.buttons div .specials {
+    background-color: purple;
+}
