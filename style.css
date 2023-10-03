@@ -31,27 +31,34 @@
     width: 250px;
     height: 100px;
     background-color: rgb(198, 184, 184);
-    border-radius: 5%;
     display: flex;
-    justify-content: end;
-    align-items: end;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 0 5px; 
+
 }
 
 .input-container input {
     background-color: inherit;
-    text-align: right;
     height: 40%;
     width: 100%;
     font-size: large;
     border: none;
-    margin: 0 5px;
 }
+
+#expression {
+    text-align: left;
+}
+#answer {
+    text-align:right;
+}
+
+
 
 .buttons {
     width: 250px;
     height: 260px;
     background-color: slategray;
-    border-radius: 5%;
     display: flex;
     flex-direction: column;
     gap: 5px;
