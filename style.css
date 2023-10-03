@@ -8,11 +8,11 @@
 .container {
     width: 100vw;
     height: 100vh;
-    border: 3px solid blue;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    background-color: black;
+    background-image: url(bgimg.png);
+    background-size: cover;
 }
 
 .calculator-body {
