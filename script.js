@@ -9,17 +9,53 @@ function operations(operand, first, second) {
       b === 0 ? "ain't gonna happen!" : Math.round((a / b) * 1000) / 1000,
   };
 }
-
 let operate = operations();
+
+//selecting elements from html
 let inputBox = document.querySelector("#expression");
 let answer = document.querySelector("#answer");
 let operators = Array.from(document.querySelectorAll(".operators"));
 let equal = document.querySelector(".equal");
 
-let a, b, operand, result;
+//populating the screen
+let digits = document.querySelectorAll(".digits");
+Array.from(digits).forEach((x) =>
+  x.addEventListener("click", () => {
+    inputBox.value += x.innerText;
+  })
+);
+
+//clear button to set everything to default
+document.querySelector(".clear").addEventListener("click", clear);
+function clear() {
+  inputBox.value = "";
+  answer.value = "";
+  count = 0;
+}
+
+//backspace to modify expression
+document.querySelector(".backspace").addEventListener("click", () => {
+  let tobeCleared = inputBox.value;
+  inputBox.value = tobeCleared
+    .split("")
+    .splice(0, tobeCleared.length - 1)
+    .join("");
+});
+
+//function calling and calculations
+let a, b, operand;
 let count = 0;
 
 operators.forEach((x) => x.addEventListener("click", evaluateExpression));
+equal.addEventListener("click", () => {
+  b = Number(inputBox.value);
+  if (a && count == 1 && b) {
+    let temp = operate[`${operand}`](a, b);
+    isNaN(temp) ? (answer.value = "Syntax Error!") : (answer.value = temp);
+  } else {
+    answer.value = "Syntax Error!";
+  }
+});
 function evaluateExpression() {
   if (count === 0 && inputBox.value !== "") {
     a = Number(inputBox.value);
@@ -31,10 +67,11 @@ function evaluateExpression() {
     b = Number(inputBox.value);
     inputBox.value = "";
     a = operate[`${operand}`](a, b);
-    answer.value = a;
+    isNaN(a) ? (answer.value = "Syntax Error!") : (answer.value = a);
     operand = this.innerText;
   }
 }
+//
 
 // equal.addEventListener("click", evaluateExpression);
 
@@ -101,25 +138,3 @@ function evaluateExpression() {
 // });
 
 //dynamic expression updates
-let digits = document.querySelectorAll(".digits");
-Array.from(digits).forEach((x) =>
-  x.addEventListener("click", () => {
-    inputBox.value += x.innerText;
-  })
-);
-
-//clear
-document.querySelector(".clear").addEventListener("click", () => {
-  inputBox.value = "";
-  answer.value = "";
-  count = 0;
-});
-
-//backspace
-document.querySelector(".backspace").addEventListener("click", () => {
-  let tobeCleared = inputBox.value;
-  inputBox.value = tobeCleared
-    .split("")
-    .splice(0, tobeCleared.length - 1)
-    .join("");
-});
